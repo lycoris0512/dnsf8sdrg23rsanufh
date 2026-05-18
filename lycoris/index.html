@@ -1,0 +1,732 @@
+<!doctype html>
+<html data-title-loader="Nguyễn Trường Cương" lang="vi-VN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Trường Cương With Love</title>
+    <meta name="description" content="Hi Guys, I'm Quan, a passionate developer and designer.">
+    <meta name="keywords" content="quannotj, QuanAnh, Vu Anh Quan, profile, developer, Notj Service, vuanhquan">
+    <meta content="VuAnhQuan"" name="author">
+    <meta content="#0d1110" name="theme-color">
+    <meta property="og:title" content="Profile | VuAnhQuan">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://i.postimg.cc/tCnkTt4G/image.png">
+    <link href="https://vuanhquan.baby/" rel="canonical">
+    <link href="./assets/img/icon/tick.png" rel="shortcut icon" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" rel="stylesheet">
+    <link href="./assets/css/style.css?v=3.8" rel="stylesheet">
+    <link href="./assets/css/fuiToast.min.css" rel="stylesheet">
+    <link href="./assets/css/fancybox.css" rel="stylesheet">
+    <link href="./assets/css/index.css?v=3.1" rel="stylesheet">
+    <link href="./assets/css/home-redesign.css?v=2.5" rel="stylesheet">
+    <link href="./assets/css/cyber-premium.css?v=1.3" rel="stylesheet">
+    <style>
+        .td-lock-screen .infos .logo-ws {
+            background: transparent !important;
+            box-shadow: none !important;
+        }
+
+        .td-lock-screen .infos .logo-web-title {
+            background: transparent !important;
+            border: 0 !important;
+            box-shadow: none !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+        }
+
+        .td-lock-screen .infos .logo-web-title *,
+        .td-lock-screen .infos .web-title,
+        .td-lock-screen .infos .web_desc {
+            background: transparent !important;
+        }
+
+        .td-lock-screen .infos .web-title {
+            color: #f8fbff !important;
+            -webkit-background-clip: unset !important;
+            background-clip: unset !important;
+            -webkit-text-fill-color: unset !important;
+            text-shadow: none !important;
+            animation: none !important;
+        }
+
+        .td-lock-screen .infos .web_desc {
+            color: rgba(248, 251, 255, 0.95) !important;
+            text-shadow: none !important;
+        }
+
+        #games {
+            scroll-margin-top: 128px;
+        }
+    </style>
+    <script>
+        // Title changer disabled for performance optimization
+    </script>
+</head>
+<body class="home-page loading">
+    <div class="pace pace-active">
+        <div class="pace-progress">
+            <div class="pace-progress-inner"></div>
+        </div>
+    </div>
+
+    <div class="td-loading-v2">
+        <img alt="Notj Loader Screen" class="loading2 none" src="./assets/img/avt.jpg">
+        <div class="ws-loader-text">
+            <h4>Notj Service</h4>
+            <span id="waiting-loader">&ensp;Đang tải lời chúc...</span>
+        </div>
+    </div>
+
+    <div class="cursor-spotlight" aria-hidden="true"></div>
+    <div class="ambient-grid" aria-hidden="true"></div>
+    <div class="heart-rain" aria-hidden="true" data-heart-rain></div>
+
+    <div class="site-shell">
+        <header class="site-header group" data-glass>
+            <a class="brand-lockup" href="/" aria-label="QuanAnh home">
+                <span class="brand-mark">
+                    <img src="./assets/img/avt1.jpg?v=1" alt="QuanAnh">
+                </span>
+                <span class="brand-copy">
+                    <span class="brand-name">TruongCuong</span>
+                    <span class="brand-role">Notj Service</span>
+                </span>
+            </a>
+
+            <nav class="header-nav" aria-label="Điều hướng chính">
+                <a href="#top">Home</a>
+                <a href="#bio">Biography</a>
+                <a href="#games">Games</a>
+                <a href="#skills">Skills</a>
+                <a href="#projects">Projects</a>
+                <a href="#payment">Payment</a>
+                <a href="#contact">Contact</a>
+            </nav>
+
+            <div class="header-actions">
+                <div class="music-control" data-music-control>
+                    <button class="music-toggle" type="button" aria-label="Bật hoặc tắt nhạc nền" data-music-toggle>
+                        <i class="ri-volume-mute-line"></i>
+                    </button>
+                    <div class="volume-popover" data-volume-popover>
+                        <div class="volume-popover-head">
+                            <span>Âm lượng</span>
+                            <output id="music-volume-value" for="music-volume" data-volume-value>100%</output>
+                        </div>
+                        <div class="volume-slider-row">
+                            <i class="ri-volume-down-line" aria-hidden="true"></i>
+                            <input class="volume-slider" id="music-volume" type="range" min="0" max="100" value="100" aria-label="Điều chỉnh âm lượng nhạc nền" data-volume-slider>
+                            <i class="ri-volume-up-line" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="home-main">
+            <section class="hero-section reveal" id="top">
+                <div class="hero-copy">
+                    <div class="eyebrow">
+                        <span></span>
+                        Digital Profile / 2026
+                    </div>
+                    <h1 class="hero-title">
+                        <span class="magic">
+                            <span class="magic-star" aria-hidden="true">
+                                <svg viewBox="0 0 512 512"><path d="M512 255.1c0 11.34-7.406 20.86-18.44 23.64l-171.3 42.78l-42.78 171.1C276.7 504.6 267.2 512 255.9 512s-20.84-7.406-23.62-18.44l-42.66-171.2L18.47 279.6C7.406 276.8 0 267.3 0 255.1c0-11.34 7.406-20.83 18.44-23.61l171.2-42.78l42.78-171.1C235.2 7.406 244.7 0 256 0s20.84 7.406 23.62 18.44l42.78 171.2l171.2 42.78C504.6 235.2 512 244.6 512 255.1z"></path></svg>
+                            </span>
+                            <span class="magic-star" aria-hidden="true">
+                                <svg viewBox="0 0 512 512"><path d="M512 255.1c0 11.34-7.406 20.86-18.44 23.64l-171.3 42.78l-42.78 171.1C276.7 504.6 267.2 512 255.9 512s-20.84-7.406-23.62-18.44l-42.66-171.2L18.47 279.6C7.406 276.8 0 267.3 0 255.1c0-11.34 7.406-20.83 18.44-23.61l171.2-42.78l42.78-171.1C235.2 7.406 244.7 0 256 0s20.84 7.406 23.62 18.44l42.78 171.2l171.2 42.78C504.6 235.2 512 244.6 512 255.1z"></path></svg>
+                            </span>
+                            <span class="magic-star" aria-hidden="true">
+                                <svg viewBox="0 0 512 512"><path d="M512 255.1c0 11.34-7.406 20.86-18.44 23.64l-171.3 42.78l-42.78 171.1C276.7 504.6 267.2 512 255.9 512s-20.84-7.406-23.62-18.44l-42.66-171.2L18.47 279.6C7.406 276.8 0 267.3 0 255.1c0-11.34 7.406-20.83 18.44-23.61l171.2-42.78l42.78-171.1C235.2 7.406 244.7 0 256 0s20.84 7.406 23.62 18.44l42.78 171.2l171.2 42.78C504.6 235.2 512 244.6 512 255.1z"></path></svg>
+                            </span>
+                            <span class="magic-text">Nguyễn Trường Cương</span>
+                        </span>
+                    </h1>
+                    <div class="hero-lead" style="margin-top: 15px; display: flex; justify-content: center;">
+                        <a href="https://discord.com/users/958392171130675250" target="_blank" rel="noopener">
+                            <img src="https://lanyard.cnrad.dev/api/958392171130675250?theme=dark&bg=transparent" alt="Discord RPC" style="width: 320px; max-width: 100%; border-radius: 12px; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                        </a>
+                    </div>
+
+                    <div class="hero-actions">
+                        <a class="primary-action" href="https://vuanhquan.baby:2096/" target="_blank" rel="noopener">
+                            <span>Box Chat Website</span>
+                            <i class="ri-arrow-right-up-line"></i>
+                        </a>
+                        <a class="secondary-action" href="mailto:anhquanbn1@gmail.com">
+                            <span>Contact</span>
+                            <i class="ri-mail-send-line"></i>
+                        </a>
+                    </div>
+
+                    <div class="social-strip" aria-label="Liên kết xã hội">
+                        <a href="https://discord.com/users/959094186110509137" target="_blank" rel="noopener">
+                            <i class="ri-discord-line"></i>
+                            Discord
+                        </a>
+                        <a href="https://t.me/quannotj" target="_blank" rel="noopener">
+                            <i class="ri-telegram-line"></i>
+                            Telegram
+                        </a>
+                        <a href="mailto:anhquanbn1@gmail.com">
+                            <i class="ri-mail-line"></i>
+                            Email
+                        </a>
+                    </div>
+                </div>
+
+                <aside class="hero-visual" data-tilt aria-label="QuanAnh profile preview">
+                    <div class="motion-window" aria-hidden="true">
+                        <video class="hero-video" autoplay loop muted playsinline>
+                            <source src="./assets/video/mb.mp4?v=1" media="(max-width: 720px)" type="video/mp4">
+                            <source src="./assets/video/pc.mp4?v=1" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="portrait-stage">
+                        <img class="profile-aura" src="" alt="" aria-hidden="true">
+                        <div class="profile-avatar" aria-label="Ảnh đại diện Nguyễn Trường Cương">
+                            <img src="./assets/img/download.gif?v=2" alt="">
+                        </div>
+                    </div>
+                    <div class="signal-board">
+                        <div>
+                            <span class="signal-dot" aria-hidden="true"></span>
+                            Online
+                        </div>
+                        <strong id="real-time">00:00:00</strong>
+                    </div>
+                </aside>
+            </section>
+
+            <div class="marquee-track reveal" aria-hidden="true">
+                <div class="marquee-inner">
+                    <span>Creative Developer</span>
+                    <span>Backend Focus</span>
+                    <span>UI Motion</span>
+                    <span>Notj Service</span>
+                    <span>Digital Craft</span>
+                    <span>High Performance</span>
+                    <span>Clean Architecture</span>
+                    <span>Product Mindset</span>
+                    <span>Secure Systems</span>
+                    <span>Modern Interface</span>
+                    <span>Vibe Coding</span>
+                    <span>Creative Developer</span>
+                    <span>Backend Focus</span>
+                    <span>UI Motion</span>
+                    <span>Notj Service</span>
+                    <span>Digital Craft</span>
+                    <span>High Performance</span>
+                    <span>Clean Architecture</span>
+                    <span>Product Mindset</span>
+                    <span>Secure Systems</span>
+                    <span>Modern Interface</span>
+                    <span>Vibe Coding</span>
+                </div>
+            </div>
+
+            <section class="section-grid reveal" id="bio">
+                <div class="section-label">
+                    <span>Biography</span>
+                </div>
+                <div class="content-panel bio-panel">
+                    <h2>Hello My Friends. Welcome!</h2>
+                    <div class="bio-copy">
+                        <p>Hello, my name is Quan and I am 18 years old. I am a member of Notj Service and a freelance programmer with a passion for building polished digital experiences.</p>
+                        <p>I am currently studying at Hanoi University of Mining and Geology (HUMG).</p>
+                        <p>Technology and programming have always been strong passions of mine, especially in the fields of software development and cybersecurity. During free time, I enjoy exploring creative coding projects, learning about unique programming techniques, and improving my technical skills through practice and self-study. Protecting cyberspace and understanding digital security are also areas that greatly interest me.</p>
+                        <p>Outside of academics and coding, music, gaming, and spending time with friends are some of my favorite activities. League of Legends is one of the games I enjoy the most because it helps develop teamwork, strategic thinking, and communication skills.</p>
+                        <p>With a strong interest in technology and continuous learning, the goal is to become a skilled developer capable of building innovative and secure digital solutions in the future.</p>
+                        <p id="cham-ngon">Đang tải một câu nói hay...</p>
+                    </div>
+                    <div class="metric-grid">
+                        <div>
+                            <strong>36+</strong>
+                            <span>Stack yêu thích</span>
+                        </div>
+                        <div>
+                            <strong>24/7</strong>
+                            <span>Online energy</span>
+                        </div>
+                        <div>
+                            <strong>∞</strong>
+                            <span>Creative mode</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section-grid reveal" id="games">
+                <div class="section-label">
+                    <span>Games</span>
+                </div>
+                <div class="project-card-grid">
+                    <article class="project-card" data-tilt>
+                        <div class="project-card-icon">
+                            <img src="./assets/img/lol.png?v=1" alt="LoL" style="width:40px;height:40px;object-fit:contain;">
+                        </div>
+                        <h3>LoL</h3>
+                        <p>Bố Quân Tới Chơi#2911</p>
+                        <div class="project-card-actions">
+                            <a href="https://www.leagueoflegends.com/" target="_blank" rel="noopener">
+                                <span>Play Now</span>
+                                <i class="ri-arrow-right-up-line"></i>
+                            </a>
+                        </div>
+                    </article>
+                    <article class="project-card" data-tilt>
+                        <div class="project-card-icon">
+                            <img src="./assets/img/rbl.png" alt="ROBLOX" style="width:40px;height:40px;object-fit:contain;">
+                        </div>
+                        <h3>ROBLOX</h3>
+                        <p>QuanDzVaiCaLon</p>
+                        <div class="project-card-actions">
+                            <a href="https://www.roblox.com/" target="_blank" rel="noopener">
+                                <span>Play Now</span>
+                                <i class="ri-arrow-right-up-line"></i>
+                            </a>
+                        </div>
+                    </article>
+                    <article class="project-card" data-tilt>
+                        <div class="project-card-icon">
+                            <img src="./assets/img/tft.png" alt="TFT" style="width:40px;height:40px;object-fit:contain;">
+                        </div>
+                        <h3>TFT</h3>
+                        <p>Bố Quân Tới Chơi#2911</p>
+                        <div class="project-card-actions">
+                            <a href="https://teamfighttactics.leagueoflegends.com/" target="_blank" rel="noopener">
+                                <span>Play Now</span>
+                                <i class="ri-arrow-right-up-line"></i>
+                            </a>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <section class="section-grid reveal" id="skills">
+                <div class="section-label">
+                    <span>Skills</span>
+                </div>
+                <div class="skills-layout">
+                    <article class="skill-block">
+                        <h3><i class="ri-code-s-slash-line"></i> Web</h3>
+                        <div class="skill-cloud">
+                            <span class="skill-pill"><i class="devicon-vuejs-line"></i>Vue.js</span>
+                            <span class="skill-pill"><i class="devicon-react-original"></i>React.js</span>
+                            <span class="skill-pill"><i class="devicon-nodejs-plain"></i>Node.js</span>
+                            <span class="skill-pill"><i class="devicon-javascript-plain"></i>JavaScript</span>
+                            <span class="skill-pill"><i class="devicon-typescript-plain"></i>TypeScript</span>
+                            <span class="skill-pill"><i class="devicon-html5-plain"></i>HTML</span>
+                            <span class="skill-pill"><i class="devicon-css3-plain"></i>CSS</span>
+                        </div>
+                    </article>
+                    <article class="skill-block">
+                        <h3><i class="ri-terminal-box-line"></i> Programming</h3>
+                        <div class="skill-cloud">
+                            <span class="skill-pill"><i class="devicon-python-plain"></i>Python</span>
+                            <span class="skill-pill"><i class="devicon-mysql-original"></i>MySQL</span>
+                            <span class="skill-pill"><i class="devicon-postgresql-plain"></i>PostgreSQL</span>
+                            <span class="skill-pill"><i class="devicon-cplusplus-line"></i>C++</span>
+                            <span class="skill-pill"><i class="devicon-pytorch-original"></i>PyTorch</span>
+                        </div>
+                    </article>
+                    <article class="skill-block">
+                        <h3><i class="ri-tools-line"></i> Tools</h3>
+                        <div class="skill-cloud">
+                            <span class="skill-pill"><i class="devicon-git-plain"></i>Git</span>
+                            <span class="skill-pill"><i class="devicon-linux-plain"></i>Linux</span>
+                            <span class="skill-pill"><i class="devicon-docker-plain"></i>Docker</span>
+                            <span class="skill-pill"><i class="devicon-nginx-original"></i>Nginx</span>
+                            <span class="skill-pill"><i class="devicon-figma-plain"></i>Figma</span>
+                        </div>
+                    </article>
+                    <article class="skill-block">
+                        <h3><i class="ri-server-line"></i> Backend</h3>
+                        <div class="skill-cloud">
+                            <span class="skill-pill"><i class="ri-route-line"></i>REST API</span>
+                            <span class="skill-pill"><i class="devicon-graphql-plain"></i>GraphQL</span>
+                            <span class="skill-pill"><i class="devicon-express-original"></i>Express.js</span>
+                            <span class="skill-pill"><i class="devicon-fastapi-plain"></i>FastAPI</span>
+                            <span class="skill-pill"><i class="ri-shield-keyhole-line"></i>Authentication</span>
+                            <span class="skill-pill"><i class="ri-broadcast-line"></i>WebSocket</span>
+                        </div>
+                    </article>
+                    <article class="skill-block">
+                        <h3><i class="ri-layout-4-line"></i> Frontend</h3>
+                        <div class="skill-cloud">
+                            <span class="skill-pill"><i class="ri-device-line"></i>Responsive Design</span>
+                            <span class="skill-pill"><i class="devicon-tailwindcss-original"></i>Tailwind CSS</span>
+                            <span class="skill-pill"><i class="devicon-bootstrap-plain"></i>Bootstrap</span>
+                            <span class="skill-pill"><i class="devicon-redux-original"></i>Redux</span>
+                            <span class="skill-pill"><i class="devicon-vuejs-line"></i>Vuex</span>
+                            <span class="skill-pill"><i class="ri-palette-line"></i>UI/UX</span>
+                        </div>
+                    </article>
+                    <article class="skill-block">
+                        <h3><i class="ri-smartphone-line"></i> Mobile</h3>
+                        <div class="skill-cloud">
+                            <span class="skill-pill"><i class="devicon-react-original"></i>React Native</span>
+                            <span class="skill-pill"><i class="devicon-flutter-plain"></i>Flutter</span>
+                            <span class="skill-pill"><i class="devicon-android-plain"></i>Android</span>
+                            <span class="skill-pill"><i class="devicon-materialui-plain"></i>Material Design</span>
+                            <span class="skill-pill"><i class="devicon-sqlite-plain"></i>SQLite</span>
+                            <span class="skill-pill"><i class="ri-device-line"></i>Responsive Mobile UI</span>
+                            <span class="skill-pill"><i class="ri-wifi-off-line"></i>Offline</span>
+                        </div>
+                    </article>
+                        <article class="skill-block">
+                        <h3><i class="ri-brain-line"></i> AI / Data</h3>
+                        <div class="skill-cloud">
+                            <span class="skill-pill"><i class="ri-brain-line"></i>Machine Learning</span>
+                            <span class="skill-pill"><i class="ri-node-tree"></i>Deep Learning</span>
+                            <span class="skill-pill"><i class="ri-chat-voice-line"></i>NLP</span>
+                            <span class="skill-pill"><i class="ri-eye-line"></i>Computer Vision</span>
+                            <span class="skill-pill"><i class="devicon-pandas-line"></i>Pandas</span>
+                            <span class="skill-pill"><i class="devicon-numpy-line"></i>NumPy</span>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <section class="section-grid reveal" id="projects">
+                <div class="section-label">
+                    <span>Projects</span>
+                </div>
+                <div class="project-card-grid">
+                    <article class="project-card" data-tilt>
+                        <div class="project-card-icon">
+                            <i class="ri-window-line" aria-hidden="true"></i>
+                        </div>
+                        <span class="project-index">01 / Website</span>
+                        <h3>Chat Box</h3>
+                        <p>Website chat realtime dùng Express, Socket.IO và SQLite, suộc hỗ trợ nhiều chức năng cơ bản.</p>
+                        <a class="project-link" href="https://github.com/QuanNotj/box-chat-website" target="_blank" rel="noopener">
+                            <span>View on GitHub</span>
+                            <i class="ri-arrow-right-up-line"></i>
+                        </a>
+                    </article>
+                    <article class="project-card" data-tilt>
+                        <div class="project-card-icon">
+                            <i class="ri-chat-3-line" aria-hidden="true"></i>
+                        </div>
+                        <span class="project-index">02 / Game</span>
+                        <h3>Ngọc Rồng Online</h3>
+                        <p>Cung cấp API/Web xem dữ liệu Ngọc Rồng Online và nhiều server lậu (item, NPC, quái, map, kỹ năng...).</p>
+                        <a class="project-link" href="https://github.com/ElectroHeavenVN/DataNRO" target="_blank" rel="noopener">
+                            <span>View on GitHub</span>
+                            <i class="ri-arrow-right-up-line"></i>
+                        </a>
+                    </article>
+                    <article class="project-card" data-tilt>
+                        <div class="project-card-icon">
+                            <i class="ri-tools-line" aria-hidden="true"></i>
+                        </div>
+                        <span class="project-index">03 / Service</span>
+                        <h3>Codex CLI</h3>
+                        <p>Công cụ AI coding agent của OpenAI chạy trong terminal, có thể đọc, sửa và chạy code trên máy của bạn.</p>
+                        <a class="project-link" href="https://github.com/openai/codex" target="_blank" rel="noopener">
+                            <span>View on GitHub</span>
+                            <i class="ri-arrow-right-up-line"></i>
+                        </a>
+                    </article>
+                </div>
+            </section>
+
+            <section class="section-grid reveal" id="payment">
+                <div class="section-label">
+                    <span>Payment</span>
+                </div>
+                <div class="payment-grid">
+                    <article class="pay-card" data-tilt>
+                        <div class="bank-icon">
+                            <img src="./assets/img/icon/mbbank.png" alt="MBBank">
+                        </div>
+                        <div class="bank-info">
+                            <span>MBBank</span>
+                            <strong>VU ANH QUAN</strong>
+                            <button type="button" data-ws-copy="0222299994444">
+                                0222299994444
+                                <i class="ri-file-copy-line"></i>
+                            </button>
+                        </div>
+                    </article>
+                    <article class="pay-card" data-tilt>
+                        <div class="bank-icon">
+                            <img src="./assets/img/icon/tech2.png" alt="Techcombank">
+                        </div>
+                        <div class="bank-info">
+                            <span>Techcombank</span>
+                            <strong>VU ANH QUAN</strong>
+                            <button type="button" data-ws-copy="5554123456789">
+                                5554123456789
+                                <i class="ri-file-copy-line"></i>
+                            </button>
+                        </div>
+                    </article>
+                    <article class="pay-card" data-tilt>
+                        <div class="bank-icon">
+                            <img src="./assets/img/icon/1.png" alt="Bitcoin">
+                        </div>
+                        <div class="bank-info">
+                            <span>Bitcoin</span>
+                            <strong>VU ANH QUAN</strong>
+                            <button type="button" data-ws-copy="bc1qsyv24p9x2sgw2j053xvgyxe8cav8a4g3zj34pr">
+                                bc1qsyv24p9x2s...
+                                <i class="ri-file-copy-line"></i>
+                            </button>
+                        </div>
+                    </article>
+                    <article class="pay-card" data-tilt>
+                        <div class="bank-icon">
+                            <img src="./assets/img/icon/2.png" alt="Litecoin">
+                        </div>
+                        <div class="bank-info">
+                            <span>Litecoin</span>
+                            <strong>VU ANH QUAN</strong>
+                            <button type="button" data-ws-copy="LLn89778SVmMeA8ARPPSf2W67Un73iHy7P">
+                                LLn89778SVmMeA...
+                                <i class="ri-file-copy-line"></i>
+                            </button>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <section class="contact-showcase reveal" id="contact">
+                <div class="contact-heading">
+                    <span class="section-label-inline">Contact</span>
+                    <h2>Need to contact me directly?</h2>
+                    <p>My contact information is below so you can message me directly and discuss work with me right away.</p>
+                </div>
+                <div class="contact-card-grid">
+                    <article class="contact-card">
+                        <div class="contact-card-icon">
+                            <i class="ri-discord-fill"></i>
+                        </div>
+                        <h3>Discord</h3>
+                        <p>quannotj • thằng bố mày</p>
+                        <a href="https://discord.com/users/959094186110509137" target="_blank" rel="noopener">
+                            Dms
+                            <i class="ri-arrow-right-line"></i>
+                        </a>
+                    </article>
+                    <article class="contact-card">
+                        <div class="contact-card-icon">
+                            <i class="ri-telegram-fill"></i>
+                        </div>
+                        <h3>Telegram</h3>
+                        <p>@quannotj</p>
+                        <a href="https://t.me/quannotj" target="_blank" rel="noopener">
+                            Contact
+                            <i class="ri-arrow-right-line"></i>
+                        </a>
+                    </article>
+                    <article class="contact-card">
+                        <div class="contact-card-icon">
+                            <i class="ri-mail-send-line"></i>
+                        </div>
+                        <h3>Mail</h3>
+                        <p>anhquanbn1@gmail.com</p>
+                        <a href="mailto:anhquanbn1@gmail.com">
+                            Send Mail
+                            <i class="ri-arrow-right-line"></i>
+                        </a>
+                    </article>
+                </div>
+            </section>
+        </main>
+
+        <button class="scroll-top" data-show="true" id="croll-to-top" type="button" aria-label="Cuộn lên đầu trang">
+            <span class="scroll-percent">
+                <span class="text">0</span><span>%</span>
+            </span>
+            <i class="ri-arrow-up-line"></i>
+        </button>
+
+        <footer class="site-footer">
+            <p>&copy; <samp>2026</samp> <a href="/">Notj Service</a> - Skid Idea Bố Mày Sút Vỡ Alo.</p>
+        </footer>
+
+        <div class="music-consent" id="music-consent" role="dialog" aria-modal="false" aria-labelledby="music-consent-title">
+            <div class="music-consent-card">
+                <button class="music-consent-close" type="button" aria-label="Đóng" data-music-consent-close>
+                    <i class="ri-close-line"></i>
+                </button>
+                <div class="music-consent-icon">
+                    <i class="ri-music-2-line"></i>
+                </div>
+                <div class="music-consent-copy">
+                    <h2 id="music-consent-title">Play music?</h2>
+                    <p>Music will softly play in the background after you allow it.</p>
+                </div>
+                <div class="music-consent-actions">
+                    <button class="music-consent-accept" type="button" data-music-consent-accept>Yes</button>
+                    <button class="music-consent-decline" type="button" data-music-consent-decline>No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (() => {
+            const playlist = [
+                "./1.mp3",
+                "./2.mp3",
+                "./3.mp3",
+                "./4.mp3",
+                "./5.mp3",
+                "./6.mp3",
+                "./7.mp3",
+                "./8.mp3",
+                "./9.mp3",
+                "./10.mp3",
+                "./11.mp3",
+                "./12.mp3",
+                "./13.mp3",
+                "./14.mp3",
+                "./15.mp3",
+                "./16.mp3"
+            ];
+            const audio = document.createElement("audio");
+            audio.preload = "none";
+            audio.controls = false;
+            audio.style.display = "none";
+            document.body.appendChild(audio);
+
+            const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+            let storedVolume = Number.NaN;
+            try {
+                storedVolume = Number.parseFloat(localStorage.getItem("qa_music_volume"));
+            } catch (error) {
+                storedVolume = Number.NaN;
+            }
+            const initialVolume = Number.isFinite(storedVolume) ? clamp(storedVolume, 0, 1) : 0.72;
+            const shuffle = (items) => {
+                const array = items.slice();
+                for (let i = array.length - 1; i > 0; i -= 1) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+                return array;
+            };
+            let queue = shuffle(playlist);
+            let queueIndex = 0;
+            const nextSong = () => {
+                if (queueIndex >= queue.length) {
+                    queue = shuffle(playlist);
+                    queueIndex = 0;
+                }
+                return queue[queueIndex++];
+            };
+            const play = () => {
+                if (!audio.src) {
+                    audio.src = nextSong();
+                }
+                return audio.play();
+            };
+            const toggle = document.querySelector("[data-music-toggle]");
+            const volumeSlider = document.querySelector("[data-volume-slider]");
+            const volumeValue = document.querySelector("[data-volume-value]");
+            const consent = document.getElementById("music-consent");
+            const accept = document.querySelector("[data-music-consent-accept]");
+            const decline = document.querySelector("[data-music-consent-decline]");
+            const close = document.querySelector("[data-music-consent-close]");
+            let consentTimer = 0;
+            let consentHandled = false;
+            audio.volume = initialVolume;
+            const syncVolumeUi = () => {
+                const percent = Math.round(audio.volume * 100);
+                if (volumeSlider) volumeSlider.value = `${percent}`;
+                if (volumeValue) volumeValue.textContent = `${percent}%`;
+            };
+            const saveVolume = () => {
+                try {
+                    localStorage.setItem("qa_music_volume", `${audio.volume}`);
+                } catch (error) {
+                    // Ignore blocked storage; volume still works for this page load.
+                }
+            };
+            const setIcon = (active) => {
+                if (!toggle) return;
+                const icon = active && audio.volume > 0
+                    ? audio.volume < 0.45 ? "ri-volume-down-line" : "ri-volume-up-line"
+                    : "ri-volume-mute-line";
+                toggle.innerHTML = `<i class="${icon}"></i>`;
+                toggle.classList.toggle("is-active", active && audio.volume > 0);
+            };
+            const hideConsent = () => {
+                consentHandled = true;
+                window.clearTimeout(consentTimer);
+                consent?.classList.remove("is-visible");
+            };
+            const showConsent = () => {
+                if (!consent || consentHandled) return;
+                window.clearTimeout(consentTimer);
+                consentTimer = window.setTimeout(() => {
+                    if (!consentHandled) consent.classList.add("is-visible");
+                }, 900);
+            };
+            syncVolumeUi();
+
+            toggle?.addEventListener("click", () => {
+                hideConsent();
+                if (audio.paused) {
+                    play().then(() => setIcon(true)).catch(() => setIcon(false));
+                } else {
+                    audio.pause();
+                    setIcon(false);
+                }
+            });
+
+            accept?.addEventListener("click", () => {
+                play().then(() => {
+                    setIcon(true);
+                    hideConsent();
+                }).catch(() => {
+                    setIcon(false);
+                    hideConsent();
+                });
+            });
+
+            [decline, close].forEach((button) => {
+                button?.addEventListener("click", hideConsent);
+            });
+
+            volumeSlider?.addEventListener("input", () => {
+                audio.volume = clamp(Number(volumeSlider.value) / 100, 0, 1);
+                syncVolumeUi();
+                saveVolume();
+                setIcon(!audio.paused);
+            });
+
+            audio.addEventListener("ended", () => {
+                audio.src = nextSong();
+                play().catch(() => setIcon(false));
+            });
+
+            window.HomeMusic = { play, pause: () => audio.pause(), setIcon };
+            if (document.readyState === "complete") {
+                showConsent();
+            } else {
+                window.addEventListener("load", showConsent);
+            }
+        })();
+    </script>
+    <script src="./assets/js/libs/jquery-3.7.1.min.js"></script>
+    <script src="./assets/js/libs/fuiToast.min.js"></script>
+    <script src="./assets/js/libs/fancybox.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pace-js@latest/pace.min.js" data-pace-options='{"restartOnRequestAfter":false,"eventLag":false}'></script>
+    <script src="./assets/js/index.js?v=3.8"></script>
+    <script src="./assets/js/home-redesign.js?v=2.2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="./assets/js/cyber-premium.js?v=1.0"></script>
+</body>
+</html>
