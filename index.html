@@ -146,38 +146,176 @@
                             <span class="magic-star" aria-hidden="true">
                                 <svg viewBox="0 0 512 512"><path d="M512 255.1c0 11.34-7.406 20.86-18.44 23.64l-171.3 42.78l-42.78 171.1C276.7 504.6 267.2 512 255.9 512s-20.84-7.406-23.62-18.44l-42.66-171.2L18.47 279.6C7.406 276.8 0 267.3 0 255.1c0-11.34 7.406-20.83 18.44-23.61l171.2-42.78l42.78-171.1C235.2 7.406 244.7 0 256 0s20.84 7.406 23.62 18.44l42.78 171.2l171.2 42.78C504.6 235.2 512 244.6 512 255.1z"></path></svg>
                             </span>
-                            <span class="magic-text" style="font-size: 0.7em; white-space: nowrap; font-family: 'Be Vietnam Pro', sans-serif; font-style: normal;">Nguyễn Trường Cương</span>
+                            <span class="magic-text" style="font-size: 0.45em; white-space: nowrap; font-family: 'Be Vietnam Pro', sans-serif; font-style: normal;">Nguyễn Trường Cương</span>
                         </span>
                     </h1>
                     <div class="hero-lead" style="margin-top: 15px; display: flex; justify-content: center;">
-                        <a href="https://discord.com/users/958392171130675250" target="_blank" rel="noopener">
-                            <img src="https://lanyard.cnrad.dev/api/958392171130675250?theme=dark&bg=transparent&showDisplayName=true" alt="Discord RPC" style="width: 420px; max-width: 100%; border-radius: 12px; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                        <a href="https://discord.com/users/958392171130675250" target="_blank" rel="noopener" style="text-decoration:none;">
+                            <div id="lanyard-ws" style="
+                                width: 420px; max-width: 100%;
+                                background: rgba(0,0,0,0.45);
+                                border: 1px solid rgba(255,255,255,0.08);
+                                border-radius: 14px;
+                                padding: 14px 16px;
+                                display: flex; flex-direction: column; gap: 10px;
+                                transition: transform 0.3s;
+                                backdrop-filter: blur(10px);
+                                font-family: 'Be Vietnam Pro', sans-serif;
+                            " onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+                                <!-- Header: avatar + username + status -->
+                                <div style="display:flex; align-items:center; gap:12px;">
+                                    <div style="position:relative; width:48px; height:48px; flex-shrink:0;">
+                                        <img id="lws-avatar" src="" alt="avatar" style="width:48px;height:48px;border-radius:50%;object-fit:cover;background:#222;">
+                                        <span id="lws-dot" style="
+                                            position:absolute; bottom:1px; right:1px;
+                                            width:13px; height:13px; border-radius:50%;
+                                            background:#23a559; border:2px solid #0d1117;
+                                        "></span>
+                                    </div>
+                                    <div>
+                                        <div style="display:flex;align-items:center;gap:6px;">
+                                            <span id="lws-name" style="color:#fff;font-weight:700;font-size:15px;"></span>
+                                            <span id="lws-badge" style="background:#5865f2;color:#fff;font-size:10px;padding:1px 6px;border-radius:4px;font-weight:600;display:none;"></span>
+                                        </div>
+                                        <div id="lws-custom" style="color:#b5bac1;font-size:12px;margin-top:2px;"></div>
+                                    </div>
+                                </div>
+                                <!-- Activity -->
+                                <div id="lws-activity" style="
+                                    background:rgba(255,255,255,0.05);
+                                    border-radius:8px; padding:10px 12px;
+                                    display:none; align-items:center; gap:12px;
+                                ">
+                                    <img id="lws-act-img" src="" alt="" style="width:52px;height:52px;border-radius:6px;object-fit:cover;display:none;">
+                                    <div style="flex:1;min-width:0;">
+                                        <div id="lws-act-type" style="color:#b5bac1;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;"></div>
+                                        <div id="lws-act-name" style="color:#fff;font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"></div>
+                                        <div id="lws-act-detail" style="color:#b5bac1;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"></div>
+                                        <div id="lws-act-state" style="color:#b5bac1;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"></div>
+                                    </div>
+                                </div>
+                                <!-- Idle text -->
+                                <div id="lws-idle" style="color:#4e5058;font-size:12px;font-style:italic;text-align:center;padding:4px 0;">I'm not currently doing anything!</div>
+                            </div>
                         </a>
                     </div>
+                    <script>
+                    (function(){
+                        const USER_ID = '958392171130675250';
+                        const statusColors = { online:'#23a559', idle:'#f0b232', dnd:'#f23f43', offline:'#80848e' };
+                        const typeLabels = { 0:'Playing', 1:'Streaming', 2:'Listening to', 3:'Watching', 5:'Competing in' };
+
+                        function getAvatarUrl(user) {
+                            if (!user.avatar) return 'https://cdn.discordapp.com/embed/avatars/0.png';
+                            return `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${user.avatar.startsWith('a_')?'gif':'png'}?size=128`;
+                        }
+                        function render(data) {
+                            const u = data.discord_user;
+                            const st = data.discord_status || 'offline';
+
+                            document.getElementById('lws-avatar').src = getAvatarUrl(u);
+                            document.getElementById('lws-name').textContent = u.global_name || u.username || 'lycoris0512';
+                            document.getElementById('lws-dot').style.background = statusColors[st] || '#80848e';
+
+                            // Custom status
+                            const customAct = (data.activities||[]).find(a=>a.type===4);
+                            const customEl = document.getElementById('lws-custom');
+                            if (customAct) {
+                                customEl.textContent = (customAct.emoji?.name ? customAct.emoji.name + ' ' : '') + (customAct.state || '');
+                            } else {
+                                customEl.textContent = '';
+                            }
+
+                            // Main activity (exclude custom status)
+                            const act = (data.activities||[]).find(a => a.type !== 4);
+                            const actDiv = document.getElementById('lws-activity');
+                            const idleDiv = document.getElementById('lws-idle');
+
+                            if (act) {
+                                actDiv.style.display = 'flex';
+                                idleDiv.style.display = 'none';
+                                document.getElementById('lws-act-type').textContent = typeLabels[act.type] || 'Playing';
+                                document.getElementById('lws-act-name').textContent = act.name || '';
+                                document.getElementById('lws-act-detail').textContent = act.details || '';
+                                document.getElementById('lws-act-state').textContent = act.state || '';
+
+                                // Activity image
+                                const actImg = document.getElementById('lws-act-img');
+                                if (act.assets?.large_image) {
+                                    let imgUrl = act.assets.large_image;
+                                    if (imgUrl.startsWith('mp:external/')) {
+                                        imgUrl = 'https://media.discordapp.net/external/' + imgUrl.slice(12);
+                                    } else {
+                                        imgUrl = `https://cdn.discordapp.com/app-assets/${act.application_id}/${imgUrl}.png`;
+                                    }
+                                    actImg.src = imgUrl;
+                                    actImg.style.display = 'block';
+                                } else {
+                                    actImg.style.display = 'none';
+                                }
+                            } else {
+                                actDiv.style.display = 'none';
+                                idleDiv.style.display = 'block';
+                            }
+                        }
+
+                        function connect() {
+                            const ws = new WebSocket('wss://api.lanyard.dev/socket');
+                            let heartbeatInterval;
+
+                            ws.onopen = () => {};
+                            ws.onmessage = (e) => {
+                                const msg = JSON.parse(e.data);
+                                if (msg.op === 1) { // HELLO
+                                    heartbeatInterval = setInterval(() => ws.send(JSON.stringify({op:3})), msg.d.heartbeat_interval);
+                                    ws.send(JSON.stringify({op:2, d:{subscribe_to_id: USER_ID}}));
+                                } else if (msg.op === 0) {
+                                    if (msg.t === 'INIT_STATE' || msg.t === 'PRESENCE_UPDATE') {
+                                        render(msg.d);
+                                    }
+                                }
+                            };
+                            ws.onclose = () => {
+                                clearInterval(heartbeatInterval);
+                                setTimeout(connect, 3000); // Tự kết nối lại nếu mất kết nối
+                            };
+                            ws.onerror = () => ws.close();
+                        }
+                        connect();
+                    })();
+                    </script>
 
                     <div class="hero-actions">
-                        <a class="primary-action" href="mailto:nguyentruongcuong05122006@gmail.com">
-                            <span>Email</span>
-                            <i class="ri-mail-send-line"></i>
+                        <a class="primary-action" href="https://www.facebook.com/Lycorisclone" target="_blank" rel="noopener">
+                            <span>Facebook</span>
+                            <i class="ri-facebook-circle-fill"></i>
                         </a>
-                        <a class="secondary-action" href="https://t.me/YOUR_TELEGRAM" target="_blank" rel="noopener">
-                            <span>Telegram</span>
-                            <i class="ri-telegram-line"></i>
+                        <a class="secondary-action" href="https://zalo.me/0965384106" target="_blank" rel="noopener">
+                            <span>Zalo</span>
+                            <i class="ri-chat-smile-2-fill"></i>
                         </a>
                     </div>
 
                     <div class="social-strip" aria-label="Liên kết xã hội">
-                        <a href="mailto:nguyentruongcuong05122006@gmail.com">
-                            <i class="ri-mail-line"></i>
-                            Email
+                        <a href="https://www.facebook.com/Lycorisclone" target="_blank" rel="noopener">
+                            <i class="ri-facebook-line"></i>
+                            Facebook
+                        </a>
+                        <a href="https://zalo.me/0965384106" target="_blank" rel="noopener">
+                            <i class="ri-chat-smile-2-line"></i>
+                            Zalo
+                        </a>
+                        <a href="https://discord.com/users/958392171130675250" target="_blank" rel="noopener">
+                            <i class="ri-discord-line"></i>
+                            Discord
                         </a>
                         <a href="https://t.me/YOUR_TELEGRAM" target="_blank" rel="noopener">
                             <i class="ri-telegram-line"></i>
                             Telegram
                         </a>
-                        <a href="https://discord.com/users/958392171130675250" target="_blank" rel="noopener">
-                            <i class="ri-discord-line"></i>
-                            Discord
+                        <a href="mailto:nguyentruongcuong05122006@gmail.com">
+                            <i class="ri-mail-line"></i>
+                            Email
                         </a>
                     </div>
                 </div>
@@ -683,23 +821,27 @@
             });
 
             window.HomeMusic = { play, pause: () => audio.pause(), setIcon };
-            // Thử autoplay, nếu bị chặn thì play khi user tương tác lần đầu
+            // Thử autoplay, nếu bị chặn thì hiện consent popup ngay
+            let audioUnlocked = false;
             const autoPlay = () => {
-                hideConsent();
-                play().then(() => setIcon(true)).catch(() => {
+                play().then(() => {
+                    audioUnlocked = true;
+                    setIcon(true);
+                    hideConsent();
+                }).catch(() => {
                     setIcon(false);
-                    // Chờ user click/touch bất kỳ đâu để phát nhạc
-                    const unlockAudio = () => {
-                        play().then(() => setIcon(true)).catch(() => setIcon(false));
-                        document.removeEventListener('click', unlockAudio);
-                        document.removeEventListener('touchstart', unlockAudio);
-                        document.removeEventListener('keydown', unlockAudio);
-                    };
-                    document.addEventListener('click', unlockAudio);
-                    document.addEventListener('touchstart', unlockAudio);
-                    document.addEventListener('keydown', unlockAudio);
+                    // Hiện popup consent ngay lập tức (không delay)
+                    consentHandled = false;
+                    consent?.classList.add('is-visible');
                 });
             };
+            // Khi user bấm nút âm lượng toggle - cũng unlock audio
+            const origToggleClick = toggle?.onclick;
+            toggle?.addEventListener('click', () => {
+                if (!audioUnlocked && audio.paused) {
+                    audioUnlocked = true;
+                }
+            });
             if (document.readyState === "complete") {
                 autoPlay();
             } else {
