@@ -151,103 +151,123 @@
                     </h1>
                     <p class="hero-lead">Nhà sáng tạo không gian số, Người tư duy hình ảnh & Đam mê cái đẹp.<br>Chắt lọc cảm xúc và kiến tạo những trải nghiệm đắm chìm. Được dẫn lối bởi sự tò mò và thuần túy vì đam mê.<br><span class="hero-secret bg-primary-foreground rounded text-transparent transition-colors cursor-pointer" role="button" tabindex="0" aria-label="Nhấn để hiện nội dung ẩn" data-secret-reveal>Giấc mơ vốn dĩ không có điểm dừng, trừ khi bạn tự vẽ cho nó một vạch đích</span></p>
                     <div class="hero-lead" style="margin-top: 15px;">
-                        <div id="lanyard-ws" onclick="window.open('https://discord.com/users/958392171130675250','_blank')" style="
+                        <div id="discord-widget" onclick="window.open('https://discord.com/users/958392171130675250','_blank')" style="
                             cursor: pointer;
                             width: 100%; max-width: 420px;
                             box-sizing: border-box;
-                            background: rgba(0,0,0,0.45);
-                            border: 1px solid rgba(255,255,255,0.08);
-                            border-radius: 14px;
-                            padding: 12px 14px;
-                            display: flex; flex-direction: column; gap: 10px;
-                            transition: transform 0.3s;
-                            backdrop-filter: blur(10px);
+                            display: flex; flex-direction: column; gap: 8px;
                             font-family: 'Be Vietnam Pro', sans-serif;
-                        " onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
-                            <!-- Header: avatar + username + status -->
-                            <div style="display:flex; align-items:center; gap:12px;">
-                                <div style="position:relative; width:48px; height:48px; flex-shrink:0;">
-                                    <img id="lws-avatar" src="" alt="avatar" style="width:48px;height:48px;border-radius:50%;object-fit:cover;background:#222;">
-                                    <img id="lws-deco" src="" alt="" style="position:absolute; top:0; left:0; width:100%; height:100%; transform: scale(1.2); display:none; pointer-events:none; z-index:2;">
-                                    <span id="lws-dot" style="
-                                        position:absolute; bottom:1px; right:1px;
-                                        width:13px; height:13px; border-radius:50%;
-                                        background:#80848e; border:2px solid #0d1117;
-                                        z-index:3;
-                                    "></span>
+                            transition: transform 0.3s;
+                        " onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                            
+                            <!-- Top Box: User Info -->
+                            <div style="background: rgba(27,28,30,0.85); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 12px 16px; display: flex; align-items: center; gap: 14px; backdrop-filter: blur(10px);">
+                                <!-- Avatar -->
+                                <div style="position: relative; width: 64px; height: 64px; flex-shrink: 0;">
+                                    <img id="dw-avatar" src="" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover; background: #222;">
+                                    <img id="dw-deco" src="" style="position: absolute; top: -10%; left: -10%; width: 120%; height: 120%; display: none; z-index: 2; pointer-events: none;">
+                                    <span id="dw-status" style="position: absolute; bottom: 0; right: 0; width: 16px; height: 16px; border-radius: 50%; background: #80848e; border: 3px solid #1b1c1e; z-index: 3;"></span>
                                 </div>
-                                <div>
-                                    <div style="display:flex;align-items:center;gap:6px;">
-                                        <span id="lws-name" style="color:#fff;font-weight:700;font-size:15px;">Đang kết nối...</span>
-                                        <span id="lws-badge" style="background:rgba(255,105,180,0.25);color:#fff;font-size:10px;padding:3px 6px;border-radius:6px;font-weight:700;display:none;align-items:center;gap:4px;border:1px solid rgba(255,105,180,0.3);"></span>
+                                <!-- Info -->
+                                <div style="flex: 1; min-width: 0;">
+                                    <div style="color: #b5bac1; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px;">DISCORD</div>
+                                    <div style="display: flex; align-items: center; gap: 6px;">
+                                        <span id="dw-global-name" style="color: #f2f3f5; font-size: 18px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Đang kết nối...</span>
+                                        <span id="dw-clan" style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 6px; display: none; align-items: center; gap: 4px;">
+                                            <img id="dw-clan-badge" src="" style="width: 12px; height: 12px; display: none; object-fit: contain;">
+                                            <span id="dw-clan-tag" style="color: #fff; font-size: 11px; font-weight: 700;"></span>
+                                        </span>
                                     </div>
-                                    <div id="lws-custom" style="color:#b5bac1;font-size:12px;margin-top:2px;"></div>
+                                    <div id="dw-status-text" style="color: #b5bac1; font-size: 12px; font-weight: 500; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">offline</div>
+                                    <!-- Badges -->
+                                    <div id="dw-badges" style="display: flex; gap: 4px; margin-top: 6px; flex-wrap: wrap;"></div>
                                 </div>
                             </div>
-                            <!-- Activity -->
-                            <div id="lws-activity" style="
-                                background:rgba(255,255,255,0.05);
-                                border-radius:8px; padding:10px 12px;
-                                display:none; align-items:center; gap:12px;
-                            ">
-                                <img id="lws-act-img" src="" alt="" style="width:52px;height:52px;border-radius:6px;object-fit:cover;display:none;">
-                                <div style="flex:1;min-width:0;">
-                                    <div id="lws-act-type" style="color:#b5bac1;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;"></div>
-                                    <div id="lws-act-name" style="color:#fff;font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"></div>
-                                    <div id="lws-act-detail" style="color:#b5bac1;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"></div>
-                                    <div id="lws-act-state" style="color:#b5bac1;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"></div>
+
+                            <!-- Bottom Box: Activity (Hidden by default) -->
+                            <div id="dw-activity-box" style="background: rgba(27,28,30,0.85); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 12px 16px; display: none; align-items: center; gap: 14px; backdrop-filter: blur(10px);">
+                                <!-- Activity Icon -->
+                                <div style="position: relative; width: 64px; height: 64px; flex-shrink: 0;">
+                                    <img id="dw-act-large" src="" style="width: 100%; height: 100%; border-radius: 12px; object-fit: cover; background: #2b2d31; display: none;">
+                                    <img id="dw-act-small" src="" style="position: absolute; bottom: -4px; right: -4px; width: 24px; height: 24px; border-radius: 50%; border: 3px solid #1b1c1e; background: #1b1c1e; display: none; z-index: 2;">
+                                </div>
+                                <!-- Activity Details -->
+                                <div style="flex: 1; min-width: 0;">
+                                    <div id="dw-act-type" style="color: #b5bac1; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px;">PLAYING</div>
+                                    <div id="dw-act-name" style="color: #f2f3f5; font-size: 14px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"></div>
+                                    <div id="dw-act-details" style="color: #b5bac1; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 2px;"></div>
+                                    <div id="dw-act-state" style="color: #b5bac1; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"></div>
                                 </div>
                             </div>
-                            <!-- Idle text -->
-                            <div id="lws-idle" style="color:#4e5058;font-size:12px;font-style:italic;text-align:center;padding:4px 0;">I'm not currently doing anything!</div>
+                            
                         </div>
                     </div>
                     <script>
                     (function(){
-                        var USER_ID = '958392171130675250';
+                        var API_URL = 'https://api.notjdevelopment.baby/v1/users/958392171130675250';
                         var statusColors = { online:'#23a559', idle:'#f0b232', dnd:'#f23f43', offline:'#80848e' };
                         var typeLabels = { 0:'Playing', 1:'Streaming', 2:'Listening to', 3:'Watching', 5:'Competing in' };
 
-                        function getAvatarUrl(user) {
-                            if (!user.avatar) return 'https://cdn.discordapp.com/embed/avatars/0.png';
-                            var ext = user.avatar.indexOf('a_') === 0 ? 'gif' : 'png';
-                            return 'https://cdn.discordapp.com/avatars/' + user.id + '/' + user.avatar + '.' + ext + '?size=128';
-                        }
                         function render(data) {
                             var u = data.discord_user;
                             var st = data.discord_status || 'offline';
-
-                            document.getElementById('lws-avatar').src = getAvatarUrl(u);
-                            document.getElementById('lws-name').textContent = u.global_name || u.username || 'lycoris0512';
-                            document.getElementById('lws-dot').style.background = statusColors[st] || '#80848e';
-
-                            // Show avatar decoration if exists
-                            var decoEl = document.getElementById('lws-deco');
+                            
+                            // Avatar
+                            var avatarUrl = 'https://cdn.discordapp.com/embed/avatars/0.png';
+                            if (u.avatar) {
+                                var ext = u.avatar.indexOf('a_') === 0 ? 'gif' : 'png';
+                                avatarUrl = 'https://cdn.discordapp.com/avatars/' + u.id + '/' + u.avatar + '.' + ext + '?size=128';
+                            }
+                            document.getElementById('dw-avatar').src = avatarUrl;
+                            
+                            // Deco
+                            var decoEl = document.getElementById('dw-deco');
                             if (u.avatar_decoration_data && u.avatar_decoration_data.asset) {
-                                decoEl.src = 'https://cdn.discordapp.com/avatar-decoration-presets/' + u.avatar_decoration_data.asset + '.png?size=128';
+                                decoEl.src = 'https://cdn.discordapp.com/avatar-decoration-presets/' + u.avatar_decoration_data.asset + '.png?size=128&passthrough=true';
                                 decoEl.style.display = 'block';
                             } else {
                                 decoEl.style.display = 'none';
                             }
 
-                            // Show guild badge/tag
-                            var badgeEl = document.getElementById('lws-badge');
-                            if (u.primary_guild && u.primary_guild.tag) {
-                                badgeEl.innerHTML = '';
-                                if (u.primary_guild.badge) {
-                                    var img = document.createElement('img');
-                                    img.src = 'https://cdn.discordapp.com/clan-badges/' + u.primary_guild.identity_guild_id + '/' + u.primary_guild.badge + '.png?size=16';
-                                    img.style.width = '12px';
-                                    img.style.height = '12px';
-                                    img.style.objectFit = 'contain';
-                                    badgeEl.appendChild(img);
+                            // Status
+                            document.getElementById('dw-status').style.background = statusColors[st] || '#80848e';
+                            document.getElementById('dw-status-text').textContent = st;
+
+                            // Name
+                            document.getElementById('dw-global-name').textContent = u.global_name || u.username || 'Lycoris';
+
+                            // Clan
+                            var clanEl = document.getElementById('dw-clan');
+                            if (u.clan && u.clan.tag) {
+                                document.getElementById('dw-clan-tag').textContent = u.clan.tag;
+                                if (u.clan.badge_url) {
+                                    var badgeImg = document.getElementById('dw-clan-badge');
+                                    badgeImg.src = u.clan.badge_url;
+                                    badgeImg.style.display = 'block';
                                 }
-                                var span = document.createElement('span');
-                                span.textContent = u.primary_guild.tag;
-                                badgeEl.appendChild(span);
-                                badgeEl.style.display = 'inline-flex';
+                                clanEl.style.display = 'inline-flex';
+                            } else {
+                                clanEl.style.display = 'none';
                             }
 
+                            // Badges
+                            var badgesContainer = document.getElementById('dw-badges');
+                            badgesContainer.innerHTML = '';
+                            if (data.badges && data.badges.length > 0) {
+                                data.badges.forEach(function(badge) {
+                                    if (badge.icon_url) {
+                                        var img = document.createElement('img');
+                                        img.src = badge.icon_url;
+                                        img.style.width = '20px';
+                                        img.style.height = '20px';
+                                        img.style.objectFit = 'contain';
+                                        img.title = badge.description || '';
+                                        badgesContainer.appendChild(img);
+                                    }
+                                });
+                            }
+
+                            // Activity
                             var activities = data.activities || [];
                             var customAct = null;
                             var mainAct = null;
@@ -256,88 +276,71 @@
                                 else if (!mainAct) mainAct = activities[i];
                             }
 
-                            var customEl = document.getElementById('lws-custom');
+                            // If custom status exists, prepend to status text
                             if (customAct) {
-                                var emoji = (customAct.emoji && customAct.emoji.name) ? customAct.emoji.name + ' ' : '';
-                                customEl.textContent = emoji + (customAct.state || '');
-                            } else {
-                                customEl.textContent = '';
+                                var stText = '';
+                                if (customAct.emoji && customAct.emoji.name) stText += customAct.emoji.name + ' ';
+                                if (customAct.state) stText += customAct.state;
+                                if (stText) {
+                                    document.getElementById('dw-status-text').textContent = stText;
+                                }
                             }
 
-                            var actDiv = document.getElementById('lws-activity');
-                            var idleDiv = document.getElementById('lws-idle');
-
+                            var actBox = document.getElementById('dw-activity-box');
                             if (mainAct) {
-                                actDiv.style.display = 'flex';
-                                idleDiv.style.display = 'none';
-                                document.getElementById('lws-act-type').textContent = typeLabels[mainAct.type] || 'Playing';
-                                document.getElementById('lws-act-name').textContent = mainAct.name || '';
-                                document.getElementById('lws-act-detail').textContent = mainAct.details || '';
-                                document.getElementById('lws-act-state').textContent = mainAct.state || '';
+                                actBox.style.display = 'flex';
+                                document.getElementById('dw-act-type').textContent = typeLabels[mainAct.type] || 'Playing';
+                                document.getElementById('dw-act-name').textContent = mainAct.name || '';
+                                document.getElementById('dw-act-details').textContent = mainAct.details || '';
+                                document.getElementById('dw-act-state').textContent = mainAct.state || '';
 
-                                var actImg = document.getElementById('lws-act-img');
-                                if (mainAct.assets && mainAct.assets.large_image) {
-                                    var imgUrl = mainAct.assets.large_image;
-                                    if (imgUrl.indexOf('mp:external/') === 0) {
-                                        imgUrl = 'https://media.discordapp.net/external/' + imgUrl.slice(12);
+                                var largeImg = document.getElementById('dw-act-large');
+                                var smallImg = document.getElementById('dw-act-small');
+                                
+                                if (mainAct.assets) {
+                                    if (mainAct.assets.large_image_url || mainAct.assets.large_image) {
+                                        var lUrl = mainAct.assets.large_image_url || mainAct.assets.large_image;
+                                        if (lUrl.indexOf('mp:external/') === 0) lUrl = 'https://media.discordapp.net/external/' + lUrl.slice(12);
+                                        else if (lUrl.indexOf('http') !== 0) lUrl = 'https://cdn.discordapp.com/app-assets/' + mainAct.application_id + '/' + lUrl + '.png';
+                                        largeImg.src = lUrl;
+                                        largeImg.style.display = 'block';
                                     } else {
-                                        imgUrl = 'https://cdn.discordapp.com/app-assets/' + mainAct.application_id + '/' + imgUrl + '.png';
+                                        largeImg.style.display = 'none';
                                     }
-                                    actImg.src = imgUrl;
-                                    actImg.style.display = 'block';
+
+                                    if (mainAct.assets.small_image_url || mainAct.assets.small_image) {
+                                        var sUrl = mainAct.assets.small_image_url || mainAct.assets.small_image;
+                                        if (sUrl.indexOf('mp:external/') === 0) sUrl = 'https://media.discordapp.net/external/' + sUrl.slice(12);
+                                        else if (sUrl.indexOf('http') !== 0) sUrl = 'https://cdn.discordapp.com/app-assets/' + mainAct.application_id + '/' + sUrl + '.png';
+                                        smallImg.src = sUrl;
+                                        smallImg.style.display = 'block';
+                                    } else {
+                                        smallImg.style.display = 'none';
+                                    }
                                 } else {
-                                    actImg.style.display = 'none';
+                                    largeImg.style.display = 'none';
+                                    smallImg.style.display = 'none';
                                 }
                             } else {
-                                actDiv.style.display = 'none';
-                                idleDiv.style.display = 'block';
+                                actBox.style.display = 'none';
                             }
                         }
 
-                        // Thử REST API trước
-                        function fetchREST() {
-                            fetch('https://api.lanyard.rest/v1/users/' + USER_ID)
+                        function fetchData() {
+                            fetch(API_URL)
                                 .then(function(r) { return r.json(); })
                                 .then(function(json) {
                                     if (json.success && json.data) {
                                         render(json.data);
                                     }
                                 })
-                                .catch(function() {
-                                    document.getElementById('lws-name').textContent = 'lycoris0512';
-                                    document.getElementById('lws-idle').textContent = 'Không thể kết nối Lanyard';
+                                .catch(function(err) {
+                                    console.error("Discord API Error:", err);
                                 });
                         }
-                        fetchREST(); // Lấy data ngay lập tức qua REST
 
-                        // WebSocket để cập nhật real-time
-                        function connect() {
-                            try {
-                                var ws = new WebSocket('wss://api.lanyard.rest/socket');
-                                var heartbeatInterval;
-
-                                ws.onopen = function() {};
-                                ws.onmessage = function(e) {
-                                    var msg = JSON.parse(e.data);
-                                    if (msg.op === 1) {
-                                        heartbeatInterval = setInterval(function() { ws.send(JSON.stringify({op:3})); }, msg.d.heartbeat_interval);
-                                        ws.send(JSON.stringify({op:2, d:{subscribe_to_id: USER_ID}}));
-                                    } else if (msg.op === 0) {
-                                        if (msg.t === 'INIT_STATE' || msg.t === 'PRESENCE_UPDATE') {
-                                            render(msg.d);
-                                        }
-                                    }
-                                };
-                                ws.onclose = function() {
-                                    clearInterval(heartbeatInterval);
-                                    setTimeout(connect, 5000);
-                                };
-                                ws.onerror = function() { ws.close(); };
-                            } catch(e) {
-                                setTimeout(connect, 5000);
-                            }
-                        }
-                        setTimeout(connect, 1000); // Khởi động WS sau 1 giây
+                        fetchData();
+                        setInterval(fetchData, 10000); // Update every 10 seconds
                     })();
                     </script>
 
