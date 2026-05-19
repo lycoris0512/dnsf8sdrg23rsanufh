@@ -161,7 +161,7 @@
                         " onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
                             
                             <!-- Top Box: User Info -->
-                            <div style="background: rgba(27,28,30,0.85); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 12px 16px; display: flex; align-items: center; gap: 14px; backdrop-filter: blur(10px);">
+                            <div style="background: rgba(0,0,0,0.45); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 12px 16px; display: flex; align-items: center; gap: 14px; backdrop-filter: blur(10px);">
                                 <!-- Avatar -->
                                 <div style="position: relative; width: 64px; height: 64px; flex-shrink: 0;">
                                     <img id="dw-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover; background: #222;">
@@ -185,7 +185,7 @@
                             </div>
 
                             <!-- Bottom Box: Activity (Hidden by default) -->
-                            <div id="dw-activity-box" style="background: rgba(27,28,30,0.85); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 12px 16px; display: none; align-items: center; gap: 14px; backdrop-filter: blur(10px);">
+                            <div id="dw-activity-box" style="background: rgba(0,0,0,0.45); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 12px 16px; display: none; align-items: center; gap: 14px; backdrop-filter: blur(10px);">
                                 <!-- Activity Icon -->
                                 <div style="position: relative; width: 64px; height: 64px; flex-shrink: 0;">
                                     <img id="dw-act-large" src="" style="width: 100%; height: 100%; border-radius: 12px; object-fit: cover; background: #2b2d31; display: none;">
@@ -327,7 +327,7 @@
                         }
 
                         function fetchData() {
-                            fetch('https://api.allorigins.win/raw?url=' + encodeURIComponent(API_URL))
+                            fetch(API_URL)
                                 .then(function(r) { return r.json(); })
                                 .then(function(json) {
                                     if (json.success && json.data) {
@@ -337,9 +337,21 @@
                                     }
                                 })
                                 .catch(function(err) {
-                                    document.getElementById('dw-global-name').textContent = 'Lỗi kết nối';
-                                    document.getElementById('dw-status-text').textContent = 'Vui lòng thử lại sau';
-                                    console.error("Discord API Error:", err);
+                                    // Fallback sang Proxy nếu bị chặn CORS
+                                    fetch('https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(API_URL))
+                                        .then(function(r) { return r.json(); })
+                                        .then(function(json) {
+                                            if (json.success && json.data) {
+                                                render(json.data);
+                                            } else {
+                                                throw new Error("Proxy Error");
+                                            }
+                                        })
+                                        .catch(function(err2) {
+                                            document.getElementById('dw-global-name').textContent = 'Lỗi kết nối';
+                                            document.getElementById('dw-status-text').textContent = 'Vui lòng thử lại sau';
+                                            console.error("Discord API Error:", err2);
+                                        });
                                 });
                         }
 
