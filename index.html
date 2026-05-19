@@ -146,7 +146,7 @@
                             <span class="magic-star" aria-hidden="true">
                                 <svg viewBox="0 0 512 512"><path d="M512 255.1c0 11.34-7.406 20.86-18.44 23.64l-171.3 42.78l-42.78 171.1C276.7 504.6 267.2 512 255.9 512s-20.84-7.406-23.62-18.44l-42.66-171.2L18.47 279.6C7.406 276.8 0 267.3 0 255.1c0-11.34 7.406-20.83 18.44-23.61l171.2-42.78l42.78-171.1C235.2 7.406 244.7 0 256 0s20.84 7.406 23.62 18.44l42.78 171.2l171.2 42.78C504.6 235.2 512 244.6 512 255.1z"></path></svg>
                             </span>
-                            <span class="magic-text" style="font-size: 50px !important; white-space: nowrap; font-family: 'Be Vietnam Pro', sans-serif !important; font-style: normal !important;">Nguyễn Trường Cương</span>
+                            <span class="magic-text" style="font-size: 50px !important; white-space: nowrap; font-family: 'Be Vietnam Pro', sans-serif !important; font-style: normal !important;">Lycoris // Sys</span>
                         </span>
                     </h1>
                     <div class="hero-lead" style="margin-top: 15px; display: flex; justify-content: center;">
@@ -177,7 +177,7 @@
                                 <div>
                                     <div style="display:flex;align-items:center;gap:6px;">
                                         <span id="lws-name" style="color:#fff;font-weight:700;font-size:15px;">Đang kết nối...</span>
-                                        <span id="lws-badge" style="background:#5865f2;color:#fff;font-size:10px;padding:1px 6px;border-radius:4px;font-weight:600;display:none;"></span>
+                                        <span id="lws-badge" style="background:rgba(255,105,180,0.25);color:#fff;font-size:10px;padding:3px 6px;border-radius:6px;font-weight:700;display:none;align-items:center;gap:4px;border:1px solid rgba(255,105,180,0.3);"></span>
                                     </div>
                                     <div id="lws-custom" style="color:#b5bac1;font-size:12px;margin-top:2px;"></div>
                                 </div>
@@ -231,8 +231,19 @@
                             // Show guild badge/tag
                             var badgeEl = document.getElementById('lws-badge');
                             if (u.primary_guild && u.primary_guild.tag) {
-                                badgeEl.textContent = u.primary_guild.tag;
-                                badgeEl.style.display = 'inline-block';
+                                badgeEl.innerHTML = '';
+                                if (u.primary_guild.badge) {
+                                    var img = document.createElement('img');
+                                    img.src = 'https://cdn.discordapp.com/clan-badges/' + u.primary_guild.identity_guild_id + '/' + u.primary_guild.badge + '.png?size=16';
+                                    img.style.width = '12px';
+                                    img.style.height = '12px';
+                                    img.style.objectFit = 'contain';
+                                    badgeEl.appendChild(img);
+                                }
+                                var span = document.createElement('span');
+                                span.textContent = u.primary_guild.tag;
+                                badgeEl.appendChild(span);
+                                badgeEl.style.display = 'inline-flex';
                             }
 
                             var activities = data.activities || [];
@@ -726,11 +737,12 @@
         </div>
     </div>
 
+    <script src="./playlist.js"></script>
     <script>
         (() => {
-            const playlist = [
-                "./1.mp3"
-            ];
+            // Tự động tải danh sách nhạc từ file playlist.js
+            const userPlaylist = window.MY_PLAYLIST && window.MY_PLAYLIST.length > 0 ? window.MY_PLAYLIST : ["1.mp3"];
+            const playlist = userPlaylist.map(song => song.startsWith('./') ? song : './' + song);
             const audio = document.createElement("audio");
             audio.preload = "none";
             audio.controls = false;
