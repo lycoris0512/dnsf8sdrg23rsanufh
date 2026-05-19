@@ -327,14 +327,18 @@
                         }
 
                         function fetchData() {
-                            fetch('https://corsproxy.io/?' + encodeURIComponent(API_URL))
+                            fetch('https://api.allorigins.win/raw?url=' + encodeURIComponent(API_URL))
                                 .then(function(r) { return r.json(); })
                                 .then(function(json) {
                                     if (json.success && json.data) {
                                         render(json.data);
+                                    } else {
+                                        throw new Error("Invalid API Response");
                                     }
                                 })
                                 .catch(function(err) {
+                                    document.getElementById('dw-global-name').textContent = 'Lỗi kết nối';
+                                    document.getElementById('dw-status-text').textContent = 'Vui lòng thử lại sau';
                                     console.error("Discord API Error:", err);
                                 });
                         }
