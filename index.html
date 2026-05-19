@@ -146,7 +146,7 @@
                             <span class="magic-star" aria-hidden="true">
                                 <svg viewBox="0 0 512 512"><path d="M512 255.1c0 11.34-7.406 20.86-18.44 23.64l-171.3 42.78l-42.78 171.1C276.7 504.6 267.2 512 255.9 512s-20.84-7.406-23.62-18.44l-42.66-171.2L18.47 279.6C7.406 276.8 0 267.3 0 255.1c0-11.34 7.406-20.83 18.44-23.61l171.2-42.78l42.78-171.1C235.2 7.406 244.7 0 256 0s20.84 7.406 23.62 18.44l42.78 171.2l171.2 42.78C504.6 235.2 512 244.6 512 255.1z"></path></svg>
                             </span>
-                            <span class="magic-text" style="font-size: 64px !important; white-space: nowrap; font-family: 'Be Vietnam Pro', sans-serif !important; font-style: normal !important;">Nguyễn Trường Cương</span>
+                            <span class="magic-text" style="font-size: 50px !important; white-space: nowrap; font-family: 'Be Vietnam Pro', sans-serif !important; font-style: normal !important;">Nguyễn Trường Cương</span>
                         </span>
                     </h1>
                     <div class="hero-lead" style="margin-top: 15px; display: flex; justify-content: center;">
@@ -166,10 +166,12 @@
                             <div style="display:flex; align-items:center; gap:12px;">
                                 <div style="position:relative; width:48px; height:48px; flex-shrink:0;">
                                     <img id="lws-avatar" src="" alt="avatar" style="width:48px;height:48px;border-radius:50%;object-fit:cover;background:#222;">
+                                    <img id="lws-deco" src="" alt="" style="position:absolute; top:-6px; left:-6px; width:60px; height:60px; display:none; pointer-events:none; z-index:2;">
                                     <span id="lws-dot" style="
                                         position:absolute; bottom:1px; right:1px;
                                         width:13px; height:13px; border-radius:50%;
                                         background:#80848e; border:2px solid #0d1117;
+                                        z-index:3;
                                     "></span>
                                 </div>
                                 <div>
@@ -216,6 +218,15 @@
                             document.getElementById('lws-avatar').src = getAvatarUrl(u);
                             document.getElementById('lws-name').textContent = u.global_name || u.username || 'lycoris0512';
                             document.getElementById('lws-dot').style.background = statusColors[st] || '#80848e';
+
+                            // Show avatar decoration if exists
+                            var decoEl = document.getElementById('lws-deco');
+                            if (u.avatar_decoration_data && u.avatar_decoration_data.asset) {
+                                decoEl.src = 'https://cdn.discordapp.com/avatar-decoration-presets/' + u.avatar_decoration_data.asset + '.png?size=128';
+                                decoEl.style.display = 'block';
+                            } else {
+                                decoEl.style.display = 'none';
+                            }
 
                             // Show guild badge/tag
                             var badgeEl = document.getElementById('lws-badge');
