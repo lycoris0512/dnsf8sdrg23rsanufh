@@ -344,7 +344,7 @@
             k.endLoading()
         }
         ),
-        console.log("%c My Github %c https://github.com/QuanNotj", "color:#fff;background:linear-gradient(90deg,#448bff,#44e9ff);padding:5px 0;", "color:#000;background:linear-gradient(90deg,#44e9ff,#ffffff);padding:5px 10px 5px 0px;");
+        console.log("%c My Discord %c https://discord.com/users/958392171130675250", "color:#fff;background:linear-gradient(90deg,#448bff,#44e9ff);padding:5px 0;", "color:#000;background:linear-gradient(90deg,#44e9ff,#ffffff);padding:5px 10px 5px 0px;");
     var _, C, T = new Image;
     function E(n, t, e, i, h) {
         this.x = n,
