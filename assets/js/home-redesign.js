@@ -2,6 +2,7 @@
     const root = document.documentElement;
     const header = document.querySelector(".site-header");
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const isMobile = window.innerWidth <= 768 || (window.matchMedia("(pointer: coarse)").matches && !window.matchMedia("(pointer: fine)").matches);
 
     let cursorTimeout;
     const updateCursor = (e) => {
@@ -11,7 +12,7 @@
             root.style.setProperty("--cursor-y", `${e.clientY}px`);
         }, 16);
     };
-    if (!prefersReducedMotion) {
+    if (!prefersReducedMotion && !isMobile) {
         document.addEventListener("pointermove", updateCursor, { passive: true });
     }
 
@@ -110,7 +111,7 @@
         scrollPanels.forEach((panel) => panel.classList.add("is-visible"));
     }
 
-    if (!prefersReducedMotion) {
+    if (!prefersReducedMotion && !isMobile) {
         document.querySelectorAll("[data-tilt]").forEach((card) => {
             card.addEventListener("pointermove", (event) => {
                 const rect = card.getBoundingClientRect();
@@ -224,7 +225,10 @@
         }, 1800 + Math.random() * 600);
     };
 
-    scheduleHeart();
+    // Chỉ chạy heart rain trên PC, tắt trên mobile
+    if (!isMobile) {
+        scheduleHeart();
+    }
     window.addEventListener("beforeunload", () => {
         if (heartTimer) window.clearTimeout(heartTimer);
     });

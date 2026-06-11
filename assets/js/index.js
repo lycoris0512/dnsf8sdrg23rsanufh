@@ -117,12 +117,16 @@
                 n.style.animation = ""
         }
         ;
-    for (let r of document.getElementsByClassName("magic-star"))
-        setTimeout(() => {
-            s(r),
-                setInterval(() => s(r), 1e3)
-        }
-            , o++ * (1e3 / 3));
+    // Magic stars: chỉ chạy trên PC (tránh forced reflow liên tục trên mobile)
+    var _isMobile = window.innerWidth <= 768 || (window.matchMedia("(pointer: coarse)").matches && !window.matchMedia("(pointer: fine)").matches);
+    if (!_isMobile) {
+        for (let r of document.getElementsByClassName("magic-star"))
+            setTimeout(() => {
+                s(r),
+                    setInterval(() => s(r), 1e3)
+            }
+                , o++ * (1e3 / 3));
+    }
     let l = document.getElementById("croll-to-top")
         , g = l.querySelector(".text")
         , m = l.querySelector("i");
@@ -159,7 +163,8 @@
         , u = ["#ff6651", "#42a5f5", "#66bb6a", "#ab47bc", "#ffa726", "#ec407a", "#26c6da", "#78909c", "#ffca28", "#5c6bc0", "#8d6e63", "#26a69a"];
     jQuery(document).ready(function (n) {
         n("body").on("click", function (t) {
-            if (document.body.classList.contains("home-page"))
+            // Click-wish: tắt trên home-page VÀ trên mobile
+            if (document.body.classList.contains("home-page") || _isMobile)
                 return;
             var e = ["♥️ Năm mới vui vẻ", "❤️ Cung hỉ ph\xe1t t\xe0i", "\uD83D\uDC9B Tiền v\xf4 như nước", "\uD83D\uDC9A Vợ đẹp con ngoan", "\uD83D\uDC99 T\xe0i lộc v\xe0o nh\xe0", "\uD83D\uDC9C Ph\xfac thọ v\xf4 bi\xean", "\uD83D\uDDA4 Sống khoẻ đ\xf3n xu\xe2n", "\uD83D\uDC96 Ph\xfa qu\xfd c\xe1t tường", "\uD83D\uDC9D Đắc lộc to\xe0n gia", "\uD83D\uDC99 Hạnh ph\xfac m\xeanh mang", "❤️ Vạn sự th\xe0nh c\xf4ng", "\uD83D\uDC9A M\xe3 đ\xe1o th\xe0nh c\xf4ng", "\uD83D\uDC99 Tiền v\xf4 tỷ tỷ", "\uD83D\uDC9C T\xe0i vạn c\xf4ng danh", "\uD83D\uDC9B Hạnh ph\xfac gia an", "\uD83D\uDC96 Sức khoẻ như voi", "\uD83D\uDC9B Th\xf4ng minh vượt trội", "\uD83D\uDC96 Ph\xfac lộc trong tay", "\uD83D\uDC9A Gia chủ ph\xe1t t\xe0i", "\uD83D\uDC9A Vạn sự như \xfd", "\uD83D\uDC9A T\xfai tiền nặng k\xfd ", "\uD83D\uDDA4 L\xe0m ăn ph\xe1t đạt", "\uD83D\uDC9B V\xe0ng bạc cao sang", "\uD83D\uDC99 Sức khỏe an nh\xe0n", "\uD83D\uDC9C C\xf4ng danh hết \xfd", "\uD83D\uDDA4 Cung hỷ cung hỷ", "\uD83D\uDC9D Hạnh ph\xfac triền mi\xean", "\uD83D\uDDA4 Sung sướng như ti\xean"]
                 , a = n(".click-wish")
@@ -339,7 +344,7 @@
             k.endLoading()
         }
         ),
-        console.log("%c My Facebook %c https://www.facebook.com/Lycorisclone", "color:#fff;background:linear-gradient(90deg,#448bff,#44e9ff);padding:5px 0;", "color:#000;background:linear-gradient(90deg,#44e9ff,#ffffff);padding:5px 10px 5px 0px;");
+        console.log("%c My Github %c https://github.com/QuanNotj", "color:#fff;background:linear-gradient(90deg,#448bff,#44e9ff);padding:5px 0;", "color:#000;background:linear-gradient(90deg,#44e9ff,#ffffff);padding:5px 10px 5px 0px;");
     var _, C, T = new Image;
     function E(n, t, e, i, h) {
         this.x = n,
@@ -483,6 +488,8 @@
         }
         ,
         T.onload = function () {
+            // Sakura particles: tắt trên mobile (canvas rAF loop liên tục rất nặng)
+            if (_isMobile) return;
             document.body.classList.contains("home-page") || S()
         }
         ,

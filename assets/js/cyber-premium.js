@@ -5,6 +5,7 @@
     if (!body || !body.classList.contains("home-page")) return;
 
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const isMobile = window.innerWidth <= 768 || (window.matchMedia("(pointer: coarse)").matches && !window.matchMedia("(pointer: fine)").matches);
     const hasGsap = Boolean(window.gsap && window.ScrollTrigger);
     const selectAll = (selector, scope = document) => Array.from(scope.querySelectorAll(selector));
     const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
@@ -18,7 +19,7 @@
         root.style.setProperty("--mesh-y", `${y}%`);
     };
 
-    if (!reduceMotion) {
+    if (!reduceMotion && !isMobile) {
         let pointerFrame = null;
         window.addEventListener("pointermove", (event) => {
             if (pointerFrame) cancelAnimationFrame(pointerFrame);
@@ -203,17 +204,30 @@
             });
         });
 
+        // Trên mobile: bỏ filter blur (nặng GPU), chỉ dùng opacity + translate
+        var surfaceFromProps = isMobile ? {
+            autoAlpha: 0,
+            y: 46,
+            scale: 0.985
+        } : {
+            autoAlpha: 0,
+            y: 46,
+            scale: 0.985,
+            filter: "blur(14px)"
+        };
+        var surfaceToProps = isMobile ? {
+            autoAlpha: 1,
+            y: 0,
+            scale: 1
+        } : {
+            autoAlpha: 1,
+            y: 0,
+            scale: 1,
+            filter: "blur(0px)"
+        };
+
         selectAll(".content-panel, .skill-block, .project-card, .pay-card, .contact-card").forEach((surface, index) => {
-            gsap.fromTo(surface, {
-                autoAlpha: 0,
-                y: 46,
-                scale: 0.985,
-                filter: "blur(14px)"
-            }, {
-                autoAlpha: 1,
-                y: 0,
-                scale: 1,
-                filter: "blur(0px)",
+            gsap.fromTo(surface, surfaceFromProps, Object.assign({}, surfaceToProps, {
                 duration: 0.9,
                 delay: Math.min((index % 4) * 0.045, 0.18),
                 onStart: () => surface.classList.remove("is-leaving"),
@@ -228,7 +242,7 @@
                     start: "top 88%",
                     once: true
                 }
-            });
+            }));
         });
 
         selectAll(".skill-cloud").forEach((cloud) => {
@@ -251,44 +265,50 @@
             });
         });
 
-        gsap.to(".ambient-grid", {
-            yPercent: 8,
-            ease: "none",
-            scrollTrigger: {
-                trigger: body,
-                start: "top top",
-                end: "bottom bottom",
-                scrub: 0.8
-            }
-        });
-
-        gsap.to(".motion-window", {
-            yPercent: -5,
-            ease: "none",
-            scrollTrigger: {
-                trigger: ".hero-section",
-                start: "top top",
-                end: "bottom top",
-                scrub: 0.9
-            }
-        });
-
-        sparks.forEach((spark, index) => {
-            gsap.to(spark, {
-                autoAlpha: 0.7,
-                x: `${24 + Math.random() * 54}px`,
-                y: `${-18 - Math.random() * 46}px`,
-                duration: 2.8 + Math.random() * 2.4,
-                delay: index * 0.08,
-                repeat: -1,
-                yoyo: true,
-                ease: "sine.inOut"
+        // Continuous parallax & spark float: chỉ chạy trên PC
+        if (!isMobile) {
+            gsap.to(".ambient-grid", {
+                yPercent: 8,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: body,
+                    start: "top top",
+                    end: "bottom bottom",
+                    scrub: 0.8
+                }
             });
-        });
+
+            gsap.to(".motion-window", {
+                yPercent: -5,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: ".hero-section",
+                    start: "top top",
+                    end: "bottom top",
+                    scrub: 0.9
+                }
+            });
+
+            sparks.forEach((spark, index) => {
+                gsap.to(spark, {
+                    autoAlpha: 0.7,
+                    x: `${24 + Math.random() * 54}px`,
+                    y: `${-18 - Math.random() * 46}px`,
+                    duration: 2.8 + Math.random() * 2.4,
+                    delay: index * 0.08,
+                    repeat: -1,
+                    yoyo: true,
+                    ease: "sine.inOut"
+                });
+            });
+        }
     };
 
-    attachSurfaceGlow();
-    attachMagneticButtons();
+    // Surface glow & magnetic buttons: chỉ trên PC
+    if (!isMobile) {
+        attachSurfaceGlow();
+        attachMagneticButtons();
+    }
     attachSecretReveal();
 
     if (reduceMotion) {
