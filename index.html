@@ -443,10 +443,6 @@
                         }
 
                         function fetchBadges() {
-                            // Chỉ thử fetch 1 lần duy nhất mỗi lần load trang (tránh spam khi proxy lỗi)
-                            if (badgesFetchAttempted) return;
-                            badgesFetchAttempted = true;
-                            
                             fetch('https://api.allorigins.win/raw?url=' + NOTJ_URL)
                                 .then(function(r) { return r.json(); })
                                 .then(function(json) {
