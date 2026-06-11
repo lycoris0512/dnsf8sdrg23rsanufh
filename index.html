@@ -421,7 +421,7 @@
                         var badgesFetched = false;
                         function fetchBadges() {
                             if (badgesFetched) return;
-                            fetch('https://api.allorigins.win/raw?url=' + encodeURIComponent(NOTJ_URL))
+                            fetch('https://api.allorigins.win/raw?url=' + NOTJ_URL)
                                 .then(function(r) { return r.json(); })
                                 .then(function(json) {
                                     if (json.success && json.data && json.data.badges) {
@@ -462,7 +462,7 @@
                                 .catch(function(err) {
                                     console.warn("Lanyard API failed, trying fallback:", err.message);
                                     // Fallback: notjdevelopment qua CORS proxy
-                                    fetch('https://api.allorigins.win/raw?url=' + encodeURIComponent(NOTJ_URL))
+                                    fetch('https://api.allorigins.win/raw?url=' + NOTJ_URL)
                                         .then(function(r) { 
                                             if (!r.ok) throw new Error('Proxy HTTP ' + r.status);
                                             return r.json(); 
