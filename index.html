@@ -418,30 +418,49 @@
                         }
 
                         // Dùng notjdevelopment API để lấy badges (qua CORS proxy)
-                        var badgesFetched = false;
+                        var badgesFetchAttempted = false;
+
+                        function renderBadges(badges) {
+                            var badgesContainer = document.getElementById('dw-badges');
+                            badgesContainer.innerHTML = '';
+                            badges.forEach(function(badge) {
+                                if (badge.icon_url) {
+                                    var img = document.createElement('img');
+                                    img.src = badge.icon_url;
+                                    img.style.width = '20px';
+                                    img.style.height = '20px';
+                                    img.style.objectFit = 'contain';
+                                    img.title = badge.description || '';
+                                    badgesContainer.appendChild(img);
+                                }
+                            });
+                        }
+
+                        // Load badges từ cache (nếu có) ngay từ đầu
+                        var cachedBadges = localStorage.getItem('lycoris_badges');
+                        if (cachedBadges) {
+                            try { renderBadges(JSON.parse(cachedBadges)); } catch(e) {}
+                        }
+
                         function fetchBadges() {
-                            if (badgesFetched) return;
+                            // Chỉ thử fetch 1 lần duy nhất mỗi lần load trang (tránh spam khi proxy lỗi)
+                            if (badgesFetchAttempted) return;
+                            badgesFetchAttempted = true;
+                            
                             fetch('https://api.allorigins.win/raw?url=' + NOTJ_URL)
                                 .then(function(r) { return r.json(); })
                                 .then(function(json) {
                                     if (json.success && json.data && json.data.badges) {
-                                        badgesFetched = true;
-                                        var badgesContainer = document.getElementById('dw-badges');
-                                        badgesContainer.innerHTML = '';
-                                        json.data.badges.forEach(function(badge) {
-                                            if (badge.icon_url) {
-                                                var img = document.createElement('img');
-                                                img.src = badge.icon_url;
-                                                img.style.width = '20px';
-                                                img.style.height = '20px';
-                                                img.style.objectFit = 'contain';
-                                                img.title = badge.description || '';
-                                                badgesContainer.appendChild(img);
-                                            }
-                                        });
+                                        var newBadges = JSON.stringify(json.data.badges);
+                                        // Chỉ render lại & lưu nếu có thay đổi
+                                        if (newBadges !== cachedBadges) {
+                                            localStorage.setItem('lycoris_badges', newBadges);
+                                            cachedBadges = newBadges;
+                                            renderBadges(json.data.badges);
+                                        }
                                     }
                                 })
-                                .catch(function() { /* badges không quan trọng, bỏ qua lỗi */ });
+                                .catch(function() { /* proxy lỗi -> bỏ qua, vẫn hiện cache */ });
                         }
 
                         function fetchData() {
