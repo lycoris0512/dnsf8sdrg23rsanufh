@@ -173,9 +173,9 @@
 
     <div class="site-shell">
         <header class="site-header group" data-glass>
-            <a class="brand-lockup" href="/" aria-label="QuanAnh home">
+            <a class="brand-lockup" href="/" aria-label="Lycoris home">
                 <span class="brand-mark">
-                    <img src="./assets/img/avt1.jpg?v=1" alt="QuanAnh">
+                    <img src="./assets/img/avt1.jpg?v=1" alt="Lycoris">
                 </span>
                 <span class="brand-copy">
                     <span class="brand-name">Nguyễn Trường Cương</span>
@@ -421,7 +421,7 @@
                         var badgesFetched = false;
                         function fetchBadges() {
                             if (badgesFetched) return;
-                            fetch('https://corsproxy.io/?' + encodeURIComponent(NOTJ_URL))
+                            fetch('https://api.allorigins.win/raw?url=' + encodeURIComponent(NOTJ_URL))
                                 .then(function(r) { return r.json(); })
                                 .then(function(json) {
                                     if (json.success && json.data && json.data.badges) {
@@ -462,7 +462,7 @@
                                 .catch(function(err) {
                                     console.warn("Lanyard API failed, trying fallback:", err.message);
                                     // Fallback: notjdevelopment qua CORS proxy
-                                    fetch('https://corsproxy.io/?' + encodeURIComponent(NOTJ_URL))
+                                    fetch('https://api.allorigins.win/raw?url=' + encodeURIComponent(NOTJ_URL))
                                         .then(function(r) { 
                                             if (!r.ok) throw new Error('Proxy HTTP ' + r.status);
                                             return r.json(); 
@@ -514,7 +514,7 @@
                     </div>
                 </div>
 
-                <aside class="hero-visual" data-tilt aria-label="QuanAnh profile preview">
+                <aside class="hero-visual" data-tilt aria-label="Lycoris profile preview">
                     <div class="motion-window" aria-hidden="true">
                         <video class="hero-video" autoplay loop muted playsinline>
                             <source src="./assets/video/mb.mp4?v=1" media="(max-width: 720px)" type="video/mp4">
